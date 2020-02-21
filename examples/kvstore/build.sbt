@@ -3,6 +3,16 @@ name := "kvstore"
 version := "1.0"
 
 scalaVersion := "2.13.1"
+scalacOptions ++= Seq(
+  "-feature",
+  "-deprecation",
+  "-encoding", "UTF-8",
+  "-unchecked",
+  "-Xlint",
+)
+
+testOptions in Test += Tests.Argument(TestFrameworks.JUnit, "-a", "-v", "-s")
+parallelExecution in Test := false
 
 val akkaVersion = "2.6.0"
 
