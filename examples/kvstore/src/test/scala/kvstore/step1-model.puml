@@ -1,0 +1,22 @@
+@startuml
+!include https://raw.githubusercontent.com/nserfontein/hello-event-modeling/master/tools/plantuml/compact.puml
+
+|Scenario|
+:**Step1-case1**
+Primary (in isolation) should properly
+register itself to the provided Arbiter;
+|Command|
+:**Arbiter**
+Join;
+detach
+
+|Scenario|
+:**Step1-case2**
+Primary (in isolation) should react
+properly to Insert, Remove, Get;
+|Command|
+:**Arbiter**
+Join;
+
+
+@enduml

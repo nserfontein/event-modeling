@@ -33,9 +33,8 @@ skinparam Swimlane {
 skinparam Shadowing	false
 
 |Silver|Scenario|
-|White|Frontend|
-|White|Processor|
-|White|System|
+|White|Client|
+|White|Provider|
 |Blue|Command|
 |Orange|Event|
 |Green|View|
