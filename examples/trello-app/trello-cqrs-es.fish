@@ -48,4 +48,5 @@ while true
        end
 
    end
+   sleep 20
 end

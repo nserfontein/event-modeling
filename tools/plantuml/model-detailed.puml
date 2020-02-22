@@ -1,0 +1,188 @@
+@startuml
+!define LIGHTGREEN
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+
+|#Gainsboro|Scenario|
+|#White|GuestUI|
+|#White|ManagerUI|
+|#White|Jobs|
+|#MistyRose|External|
+|#LightSkyBlue|Inventory|
+|#LightSkyBlue|Auth|
+|#LightSkyBlue|Payment|
+|#Coral|Events|
+|#LightGreen|Views|
+
+'--------------
+
+|Scenario|
+start
+:Register;
+|GuestUI|
+:
+Username: Text
+Password: Text
+Register: Button
+;
+|Auth|
+:Register;
+|Events|
+:Registered;
+stop
+
+'--------------
+
+|Scenario|
+start
+:Add Room;
+|ManagerUI|
+:
+Field 1: Text
+Field 2: Text
+Add Room: Button
+;
+|Inventory|
+:Add Room;
+|Events|
+:Room Added;
+|Views|
+:Room Availability;
+stop
+
+'--------------
+
+|Scenario|
+start
+:Book Room;
+|Views|
+:Room Availability;
+|GuestUI|
+:
+Date: Picker
+Rooms: List
+Book Room: Button
+;
+|Inventory|
+:Book Room;
+|Events|
+:Room Booked;
+|Views|
+:Cleaning Schedule;
+stop
+
+'--------------
+
+|Scenario|
+start
+:Ready Room;
+|Views|
+:Cleaning Schedule;
+|ManagerUI|
+:
+Tasks: List
+Ready Room: Button
+;
+|Inventory|
+:Ready Room;
+|Events|
+:Room Readied;
+|Views|
+:Cleaning Schedule;
+:Guest Roster;
+stop
+
+'--------------
+
+|Scenario|
+start
+:Check In;
+|Views|
+:Guest Roster;
+|ManagerUI|
+:
+Field1: Text
+Field2: Text
+Check In: Button
+;
+|Inventory|
+:Check In;
+|Events|
+:Checked In;
+|Views|
+:Guest Roster;
+stop
+
+'--------------
+
+|Scenario|
+start
+:Payment Request;
+|GuestUI|
+:
+Card Number: Text
+Amount: Currency
+Pay: Button
+;
+|Payment|
+:Pay;
+|Events|
+:Payment Requested;
+|Views|
+:Payments to Process;
+stop
+
+'--------------
+
+|Scenario|
+start
+:Payment Succeeded;
+|Views|
+:Payments to Process;
+|Jobs|
+:Payment Processor;
+|Payment|
+:Process Payment;
+|Events|
+:Payment Succeeded;
+|Views|
+:Payments to Process;
+:Sales Report;
+stop
+
+'--------------
+
+|Scenario|
+start
+:Guest Left Hotel;
+|External|
+:
+GPS
+Lat: Text
+Long: Text
+;
+|Inventory|
+:Translate Location;
+|Events|
+:Guest Left Hotel;
+|Views|
+:Guest Roster;
+stop
+
+'--------------
+
+|Scenario|
+start
+:Check Out;
+|Views|
+:Guest Roster;
+|Jobs|
+:Checkout Processor;
+|Inventory|
+:Check Out;
+|Events|
+:Checked Out;
+|Views|
+:Guest Roster;
+stop
+
+@enduml

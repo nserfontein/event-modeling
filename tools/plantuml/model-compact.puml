@@ -1,0 +1,237 @@
+@startuml
+
+!define Black       #000000
+!define White       #FFFFFF
+!define Grey        #BBBBBB
+!define Silver      #EEEEEE
+!define Foregound   #666666
+!define Orange      #FFE5D8
+!define Blue        #DBE8F9
+!define Green       #E8FBE8
+
+skinparam Default {
+  FontName          Tahoma
+  FontColor         Foregound
+  FontSize          14
+}
+
+skinparam Arrow {
+  Color             Foregound
+}
+
+skinparam Activity {
+  BackgroundColor   White
+  BorderColor       Foregound
+}
+
+skinparam Swimlane {
+  BorderColor       Grey
+  TitleFontColor    Black
+  TitleFontSize     18
+}
+
+|Silver|Scenario|
+|White|Frontend|
+|White|Processor|
+|White|System|
+|Blue|Command|
+|Orange|Event|
+|Green|View|
+
+'--------------
+
+|Scenario|
+:Register;
+|Frontend|
+:
+**Guest**
+Username: Text
+Password: Text
+Register: Button
+;
+|Command|
+:
+**Auth**
+Register
+;
+|Event|
+:Registered;
+detach
+
+'--------------
+
+|Scenario|
+:Add Room;
+|Frontend|
+:
+**Manager**
+Field 1: Text
+Field 2: Text
+Add Room: Button
+;
+|Command|
+:
+**Inventory**
+Add Room
+;
+|Event|
+:Room Added;
+|View|
+:Room Availability;
+detach
+
+'--------------
+
+|Scenario|
+:Book Room;
+|View|
+:Room Availability;
+|Frontend|
+:
+**Guest**
+Date: Picker
+Rooms: List
+Book Room: Button
+;
+|Command|
+:
+**Inventory**
+Book Room
+;
+|Event|
+:Room Booked;
+|View|
+:Cleaning Schedule;
+detach
+
+'--------------
+
+|Scenario|
+:Ready Room;
+|View|
+:Cleaning Schedule;
+|Frontend|
+:
+**Manager**
+Tasks: List
+Ready Room: Button
+;
+|Command|
+:
+**Inventory**
+Ready Room
+;
+|Event|
+:Room Readied;
+|View|
+:Cleaning Schedule;
+:Guest Roster;
+detach
+
+'--------------
+
+|Scenario|
+:Check In;
+|View|
+:Guest Roster;
+|Frontend|
+:
+**Manager**
+Field1: Text
+Field2: Text
+Check In: Button
+;
+|Command|
+:
+**Inventory**
+Check In
+;
+|Event|
+:Checked In;
+|View|
+:Guest Roster;
+detach
+
+'--------------
+
+|Scenario|
+:Payment Request;
+|Frontend|
+:
+**Guest**
+Card Number: Text
+Amount: Currency
+Pay: Button
+;
+|Command|
+:
+**Payment**
+Pay
+;
+|Event|
+:Payment Requested;
+|View|
+:Payments to Process;
+detach
+
+'--------------
+
+|Scenario|
+:Payment Succeeded;
+|View|
+:Payments to Process;
+|Processor|
+:Payment Processor;
+|Command|
+:
+**Payment**
+Process Payment
+;
+|Event|
+:Payment Succeeded;
+|View|
+:Payments to Process;
+:Sales Report;
+detach
+
+'--------------
+
+|Scenario|
+:Guest Left Hotel;
+|System|
+:
+**GPS**
+Lat: Text
+Long: Text
+;
+|Command|
+:
+**Inventory**
+Translate Location
+;
+|Event|
+:Guest Left Hotel;
+|View|
+:Guest Roster;
+detach
+
+'--------------
+
+|Scenario|
+:Check Out;
+|View|
+:Guest Roster;
+|Processor|
+:Checkout Processor;
+|Command|
+:
+**Inventory**
+Check Out
+;
+|Event|
+:Checked Out;
+|View|
+:Guest Roster;
+detach
+
+@enduml
