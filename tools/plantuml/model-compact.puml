@@ -5,7 +5,7 @@
 
 |Scenario|
 :Register;
-|Frontend|
+|Client|
 :
 **Guest**
 Username: Text
@@ -25,7 +25,7 @@ detach
 
 |Scenario|
 :Add Room;
-|Frontend|
+|Client|
 :
 **Manager**
 Field 1: Text
@@ -49,7 +49,7 @@ detach
 :Book Room;
 |View|
 :Room Availability;
-|Frontend|
+|Client|
 :
 **Guest**
 Date: Picker
@@ -73,7 +73,7 @@ detach
 :Ready Room;
 |View|
 :Cleaning Schedule;
-|Frontend|
+|Client|
 :
 **Manager**
 Tasks: List
@@ -97,7 +97,7 @@ detach
 :Check In;
 |View|
 :Guest Roster;
-|Frontend|
+|Client|
 :
 **Manager**
 Field1: Text
@@ -119,7 +119,7 @@ detach
 
 |Scenario|
 :Payment Request;
-|Frontend|
+|Client|
 :
 **Guest**
 Card Number: Text
@@ -143,7 +143,7 @@ detach
 :Payment Succeeded;
 |View|
 :Payments to Process;
-|Processor|
+|Client|
 :Payment Processor;
 |Command|
 :
@@ -161,7 +161,7 @@ detach
 
 |Scenario|
 :Guest Left Hotel;
-|System|
+|Provider|
 :
 **GPS**
 Lat: Text
@@ -184,7 +184,7 @@ detach
 :Check Out;
 |View|
 :Guest Roster;
-|Processor|
+|Client|
 :Checkout Processor;
 |Command|
 :
