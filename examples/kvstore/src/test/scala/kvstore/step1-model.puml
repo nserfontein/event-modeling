@@ -5,18 +5,41 @@
 :**Step1-case1**
 Primary (in isolation) should properly
 register itself to the provided Arbiter;
+|Client|
+:
+**On Startup**
+Create Replica
+;
+:**Replica**;
 |Command|
 :**Arbiter**
 Join;
+|Event|
+:JoinedPrimary;
 detach
 
 |Scenario|
 :**Step1-case2**
 Primary (in isolation) should react
 properly to Insert, Remove, Get;
+|Event|
+:JoinedPrimary;
+|Client|
+:
+**Key Lookup**
+Key: Text
+Get Value: Button
+;
 |Command|
-:**Arbiter**
-Join;
+:**Primary**
+Get "k1";
+|Client|
+:"k1" not found;
+detach
+:**Key Lookup**;
+|Command|
+:**Primary**
+Insert "k1:v1";
 
 
 @enduml

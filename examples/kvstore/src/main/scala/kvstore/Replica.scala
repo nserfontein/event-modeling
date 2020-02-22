@@ -1,6 +1,6 @@
 package kvstore
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import akka.actor.{Actor, ActorLogging, ActorRef, Props, Stash}
 import kvstore.Arbiter.{Join, PrimaryJoined}
 
 object Replica {
@@ -31,7 +31,7 @@ object Replica {
 
 }
 
-class Replica(val arbiter: ActorRef, persistenceProps: Props) extends Actor with ActorLogging {
+class Replica(val arbiter: ActorRef, persistenceProps: Props) extends Actor with Stash with ActorLogging {
 
   import Replica._
 
@@ -44,9 +44,15 @@ class Replica(val arbiter: ActorRef, persistenceProps: Props) extends Actor with
 
   val leader: Receive = {
     case Get(key, id) =>
+      sender() ! GetResult(key, None, id)
+    case Insert(key, value, id) =>
 
     case unknown =>
       log.error(s"TODO: Replica.leader $unknown")
+  }
+
+  def waiting(pendingEventCount: Int): Receive = {
+    case event: Event => ???
   }
 
 }
