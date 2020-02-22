@@ -35,6 +35,8 @@ class Replica(val arbiter: ActorRef, persistenceProps: Props) extends Actor with
 
   import Replica._
 
+  var state = State(List.empty)
+
   arbiter ! Join
 
   override def receive: Receive = {
@@ -46,13 +48,26 @@ class Replica(val arbiter: ActorRef, persistenceProps: Props) extends Actor with
     case Get(key, id) =>
       sender() ! GetResult(key, None, id)
     case Insert(key, value, id) =>
-
+      emit(RecordInserted(Record(key, value)))
+      context.become(waiting(pendingEventCount = 1), discardOld = false)
     case unknown =>
       log.error(s"TODO: Replica.leader $unknown")
   }
 
+  def emit(events: Event*): Unit = {
+    events.foreach(context.system.eventStream.publish)
+  }
+
   def waiting(pendingEventCount: Int): Receive = {
-    case event: Event => ???
+    case event: Event =>
+      state = state.updated(event)
+      if (pendingEventCount == 1) {
+        context.unbecome()
+        unstashAll()
+      } else {
+        context.become(waiting(pendingEventCount - 1))
+      }
+    case _ => stash()
   }
 
 }

@@ -8,4 +8,6 @@ class KVStoreSuite
 
   implicit val system: ActorSystem = ActorSystem("KVStoreSuite")
 
+  system.actorOf(EventHandler.props)
+
 }
