@@ -1,42 +1,5 @@
 @startuml
-
-!define Black       #000000
-!define White       #FFFFFF
-!define Grey        #BBBBBB
-!define Silver      #EEEEEE
-!define Foregound   #666666
-!define Orange      #FFE5D8
-!define Blue        #DBE8F9
-!define Green       #E8FBE8
-
-skinparam Default {
-  FontName          Tahoma
-  FontColor         Foregound
-  FontSize          14
-}
-
-skinparam Arrow {
-  Color             Foregound
-}
-
-skinparam Activity {
-  BackgroundColor   White
-  BorderColor       Foregound
-}
-
-skinparam Swimlane {
-  BorderColor       Grey
-  TitleFontColor    Black
-  TitleFontSize     18
-}
-
-|Silver|Scenario|
-|White|Frontend|
-|White|Processor|
-|White|System|
-|Blue|Command|
-|Orange|Event|
-|Green|View|
+!include https://raw.githubusercontent.com/nserfontein/hello-event-modeling/master/tools/plantuml/compact.puml
 
 '--------------
 
