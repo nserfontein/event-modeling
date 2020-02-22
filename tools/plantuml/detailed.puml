@@ -1,0 +1,41 @@
+@startuml
+
+!define White       #FFFFFF
+!define Silver      #EEEEEE
+!define Charcoal    #333333
+!define Grey        #BBBBBB
+!define Foregound   #666666
+
+!define UI          #FFFFFF
+!define Job         #FFFFFF
+!define API         #FFFFFF
+!define Command     #DBE8F9
+!define Event       #FFE5D8
+!define View        #E8FBE8
+
+skinparam Default {
+  FontName          Monospaced
+  FontColor         Foregound
+  FontSize          12
+}
+
+skinparam Arrow {
+  Color             Foregound
+}
+
+skinparam Activity {
+  BackgroundColor   White
+  BorderColor       Foregound
+}
+
+skinparam Swimlane {
+  TitleFontColor    Charcoal
+  TitleFontSize     18
+  BorderColor       Grey
+}
+
+skinparam Shadowing	false
+
+|Silver|Scenario|
+
+@enduml

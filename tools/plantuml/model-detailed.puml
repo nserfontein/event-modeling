@@ -1,22 +1,17 @@
 @startuml
-!define LIGHTGREEN
-!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+!include https://raw.githubusercontent.com/nserfontein/hello-event-modeling/master/tools/plantuml/detailed.puml
 
-|#Gainsboro|Scenario|
-|#White|GuestUI|
-|#White|ManagerUI|
-|#White|Jobs|
-|#MistyRose|External|
-|#LightSkyBlue|Inventory|
-|#LightSkyBlue|Auth|
-|#LightSkyBlue|Payment|
-|#Coral|Events|
-|#LightGreen|Views|
+|GuestUI|
+|ManagerUI|
+|Inventory|
+|Auth|
+|Payment|
+|Jobs|
+|Provider|
 
 '--------------
 
 |Scenario|
-start
 :Register;
 |GuestUI|
 :
@@ -25,15 +20,13 @@ Password: Text
 Register: Button
 ;
 |Auth|
-:Register;
-|Events|
-:Registered;
-stop
+Command:Register;
+Event:Registered;
+detach
 
 '--------------
 
 |Scenario|
-start
 :Add Room;
 |ManagerUI|
 :
@@ -42,147 +35,122 @@ Field 2: Text
 Add Room: Button
 ;
 |Inventory|
-:Add Room;
-|Events|
-:Room Added;
-|Views|
-:Room Availability;
-stop
+Command:Add Room;
+Event:Room Added;
+View:Room Availability;
+detach
 
 '--------------
 
 |Scenario|
-start
 :Book Room;
-|Views|
-:Room Availability;
 |GuestUI|
+View:Room Availability;
 :
 Date: Picker
 Rooms: List
 Book Room: Button
 ;
 |Inventory|
-:Book Room;
-|Events|
-:Room Booked;
-|Views|
-:Cleaning Schedule;
-stop
+Command:Book Room;
+Event:Room Booked;
+View:Room Availability;
+View:Cleaning Schedule;
+detach
 
 '--------------
 
 |Scenario|
-start
 :Ready Room;
-|Views|
-:Cleaning Schedule;
 |ManagerUI|
+View:Cleaning Schedule;
 :
 Tasks: List
 Ready Room: Button
 ;
 |Inventory|
-:Ready Room;
-|Events|
-:Room Readied;
-|Views|
-:Cleaning Schedule;
-:Guest Roster;
-stop
+Command:Ready Room;
+Event:Room Readied;
+View:Cleaning Schedule;
+View:Guest Roster;
+detach
 
 '--------------
 
 |Scenario|
-start
 :Check In;
-|Views|
-:Guest Roster;
 |ManagerUI|
+View:Guest Roster;
 :
 Field1: Text
 Field2: Text
 Check In: Button
 ;
 |Inventory|
-:Check In;
-|Events|
-:Checked In;
-|Views|
-:Guest Roster;
-stop
+Command:Check In;
+Event:Checked In;
+View:Guest Roster;
+detach
 
 '--------------
 
 |Scenario|
-start
 :Payment Request;
 |GuestUI|
+View:Guest Invoice;
 :
 Card Number: Text
 Amount: Currency
 Pay: Button
 ;
 |Payment|
-:Pay;
-|Events|
-:Payment Requested;
-|Views|
-:Payments to Process;
-stop
+Command:Pay;
+Event:Payment Requested;
+View:Payments to Process;
+detach
 
 '--------------
 
 |Scenario|
-start
 :Payment Succeeded;
-|Views|
-:Payments to Process;
 |Jobs|
-:Payment Processor;
+View:Payments to Process;
+Job:Payment Processor;
 |Payment|
-:Process Payment;
-|Events|
-:Payment Succeeded;
-|Views|
-:Payments to Process;
-:Sales Report;
-stop
+Command:Process Payment;
+Event:Payment Succeeded;
+View:Payments to Process;
+View:Sales Report;
+detach
 
 '--------------
 
 |Scenario|
-start
 :Guest Left Hotel;
-|External|
+|Provider|
 :
-GPS
+**GPS**
 Lat: Text
 Long: Text
 ;
 |Inventory|
-:Translate Location;
-|Events|
-:Guest Left Hotel;
-|Views|
-:Guest Roster;
-stop
+Event:GPS Update;
+Command:Translate Location;
+Event:Guest Left Hotel;
+View:Guest Roster;
+detach
 
 '--------------
 
 |Scenario|
-start
 :Check Out;
-|Views|
-:Guest Roster;
 |Jobs|
-:Checkout Processor;
+View:Guest Roster;
+Job:Checkout Processor;
 |Inventory|
-:Check Out;
-|Events|
-:Checked Out;
-|Views|
-:Guest Roster;
-stop
+Command:Check Out;
+Event:Checked Out;
+View:Guest Roster;
+detach
 
 @enduml
