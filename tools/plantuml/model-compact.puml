@@ -4,27 +4,7 @@
 '--------------
 
 |Scenario|
-:Register;
-|Client|
-:
-**Guest**
-Username: Text
-Password: Text
-Register: Button
-;
-|Command|
-:
-**Auth**
-Register
-;
-|Event|
-:Registered;
-detach
-
-'--------------
-
-|Scenario|
-:Add Room;
+:Manager adds room;
 |Client|
 :
 **Manager**
@@ -46,7 +26,27 @@ detach
 '--------------
 
 |Scenario|
-:Book Room;
+:Client registration;
+|Client|
+:
+**Guest**
+Username: Text
+Password: Text
+Register: Button
+;
+|Command|
+:
+**Auth**
+Register
+;
+|Event|
+:Registered;
+detach
+
+'--------------
+
+|Scenario|
+:Guest books room;
 |View|
 :Room Availability;
 |Client|
@@ -70,7 +70,8 @@ detach
 '--------------
 
 |Scenario|
-:Ready Room;
+:Get room ready
+for guest;
 |View|
 :Cleaning Schedule;
 |Client|
@@ -94,7 +95,7 @@ detach
 '--------------
 
 |Scenario|
-:Check In;
+:Guest checks in;
 |View|
 :Guest Roster;
 |Client|
@@ -118,7 +119,7 @@ detach
 '--------------
 
 |Scenario|
-:Payment Request;
+:Guest initiates payment;
 |Client|
 :
 **Guest**
@@ -140,7 +141,7 @@ detach
 '--------------
 
 |Scenario|
-:Payment Succeeded;
+:Guest paid successfully;
 |View|
 :Payments to Process;
 |Client|
@@ -160,7 +161,7 @@ detach
 '--------------
 
 |Scenario|
-:Guest Left Hotel;
+:Guest left hotel proximity;
 |Provider|
 :
 **GPS**
@@ -181,7 +182,7 @@ detach
 '--------------
 
 |Scenario|
-:Check Out;
+:Process checkout;
 |View|
 :Guest Roster;
 |Client|
