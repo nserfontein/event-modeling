@@ -12,22 +12,7 @@
 '--------------
 
 |Scenario|
-:Register;
-|GuestUI|
-:
-Username: Text
-Password: Text
-Register: Button
-;
-|Auth|
-Command:Register;
-Event:Registered;
-detach
-
-'--------------
-
-|Scenario|
-:Add Room;
+:Manager adds room;
 |ManagerUI|
 :
 Field 1: Text
@@ -43,7 +28,22 @@ detach
 '--------------
 
 |Scenario|
-:Book Room;
+:Guest registration;
+|GuestUI|
+:
+Username: Text
+Password: Text
+Register: Button
+;
+|Auth|
+Command:Register;
+Event:Registered;
+detach
+
+'--------------
+
+|Scenario|
+:Guest books room;
 |GuestUI|
 View:Room Availability;
 :
@@ -61,7 +61,8 @@ detach
 '--------------
 
 |Scenario|
-:Ready Room;
+:Get room ready
+for guest;
 |ManagerUI|
 View:Cleaning Schedule;
 :
@@ -78,7 +79,7 @@ detach
 '--------------
 
 |Scenario|
-:Check In;
+:Guest checks in;
 |ManagerUI|
 View:Guest Roster;
 :
@@ -95,7 +96,7 @@ detach
 '--------------
 
 |Scenario|
-:Payment Request;
+:Guest initiates payment;
 |GuestUI|
 View:Guest Invoice;
 :
@@ -112,7 +113,7 @@ detach
 '--------------
 
 |Scenario|
-:Payment Succeeded;
+:Guest paid successfully;
 |Jobs|
 View:Payments to Process;
 Job:Payment Processor;
@@ -126,15 +127,15 @@ detach
 '--------------
 
 |Scenario|
-:Guest Left Hotel;
+:Guest left hotel proximity;
 |Providers|
 :
-**GPS**
+**GPS Location**
 Lat: Text
 Long: Text
 ;
 |Inventory|
-Event:GPS Update;
+Event:GPS Location Updated;
 Command:Translate Location;
 Event:Guest Left Hotel;
 View:Guest Roster;
@@ -143,7 +144,7 @@ detach
 '--------------
 
 |Scenario|
-:Check Out;
+:Process checkout;
 |Jobs|
 View:Guest Roster;
 Job:Checkout Processor;
