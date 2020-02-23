@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/nserfontein/hello-event-modeling/master/tools/plantuml/detailed.puml
+!include https://raw.githubusercontent.com/nserfontein/event-modeling/master/tools/plantuml/detailed.puml
 
 |GuestUI|
 |ManagerUI|
