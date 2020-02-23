@@ -7,7 +7,7 @@
 |Auth|
 |Payment|
 |Jobs|
-|Provider|
+|Providers|
 
 '--------------
 
@@ -127,7 +127,7 @@ detach
 
 |Scenario|
 :Guest Left Hotel;
-|Provider|
+|Providers|
 :
 **GPS**
 Lat: Text
